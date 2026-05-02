@@ -47,7 +47,7 @@ let optionValues = []
 function saveOptions(){
   let optionCount = 1;
   const options = document.querySelectorAll('.option-item')
-  options.forEach((optionm, index) =>{
+  for(let index = 0; index < options.length; index++){
     const option_item = document.getElementById(`option${index + 1}`).value
   // 空でないかチェック
   if(!option_item){
@@ -57,9 +57,10 @@ function saveOptions(){
   // 配列に保存
   optionValues.push(option_item);
 
+}
+
   // アニメーション画面へ
   selectingAnimation('animation')
-  })
 
 }
 
