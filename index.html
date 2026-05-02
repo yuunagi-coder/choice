@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHOICE.</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-sky-950 text-indigo-200 min-h-screen flex flex-col">
+    <header id="header" class="screen hidden flex items-center justify-center p-5 border-b border-indigo-200">
+        <div class="text-2xl">
+            <h1>CHOICE.</h1>
+        </div>
+    </header>
+    <main class="flex flex-1">
+        <!-- タイトル画面 -->
+        <div id="title-screen" class="screen min-h-screen w-full items-center flex flex-col justify-center">
+            <div class="title-wrapper border-b border-indigo-200 text-center">
+                <h1 class="text-2xl p-1">CHOICE.</h1>
+                <p class="text-lg pb-10">答えはもう決まっているのかもしれない</p>
+            </div>
+            <div class="concept-wrapper text-center">
+                <p class="text-b p-10">
+                    迷いの中に、既に答えはある<br>
+                    CHOICE.はランダムな結果をきっかけに<br>
+                    あなたの”本当の答え”を引き出すアプリです
+                </p>
+            </div>
+            <div>
+                <button onclick="showScreen('setting')" class="bg-indigo-200 hover:bg-indigo-400 text-sky-950 px-4 py-2 rounded-lg w-64">
+                    クリックしてはじめる
+                </button>
+            </div>
+        </div>
+        
+        <!-- 設定画面 -->
+        <div id="setting-screen" class="screen hidden min-h-full w-full flex flex-col items-center justify-center space-y-10">
+            <div class="guidance-wrapper text-center p-10">
+                <p>何に迷っていますか？</p>
+            </div>
+            <div id="option-wrapper" class="form-wrapper flex flex-col items-center justify-center space-y-3">
+                <div class="option-item_box">
+                    <input type="text" id="option1" value="パン" class="option-item bg-sky-900 px-4 py-2 w-64 rounded-lg">
+                </div>
+                <div class="option-item_box">
+                    <input type="text" id="option2" value="米" class="option-item bg-sky-900 px-4 py-2 w-64 rounded-lg">
+                </div>
+            </div>
+            <button onclick="addOption()" class="btn_box border border-dashed border-indigo-200 px-4 py-2 rounded-lg w-64">+選択肢を追加</button>
+            <div class="p-10">
+                <button onclick="saveOptions()" class="bg-indigo-200 hover:bg-indigo-400 text-sky-950 px-4 py-2 rounded-lg w-64">
+                    はじめる
+                </button>
+            </div>
+        </div>
+        
+        <!-- アニメーション画面 -->
+        <div id="animation-screen" class="screen hidden min-h-full w-full flex flex-col items-center justify-center space-y-10 text-center">
+            <div class="guidance-wrapper flex flex-col items-center justify-center">
+                <p>選んでいます…</p>
+            </div>
+            <!-- <div class="selecting-wrapper">
+                <img src="" alt="花占い">
+                <p class="text-lg">パン</p>
+            </div>
+            <div>
+                <p>花びらをタップしてください</p>
+            </div> -->
+            <button onclick="showResult()" id="result-btn" class="hidden bg-indigo-200 hover:bg-indigo-400 text-sky-950 px-4 py-2 rounded-lg w-64">
+                    結果を見る
+            </button>
+        </div>
+        
+        <!-- 結果画面 -->
+        <div id="result-screen" class="screen hidden min-h-full w-full flex flex-col items-center justify-center text-center">
+            <div class="result-wrapper flex-1 flex flex-col items-center justify-center text-center">
+                <p class="pb-10">あなたへのおすすめは…</p>
+                <h1 id="result-text" class="text-2xl">パン</h1>
+            </div>
+            <div class="comment-wrapper flex-1 flex flex-col items-center justify-center text-center">
+                <div class="border-y border-indigo-200 p-10">
+                    <p>行動しないことも、ひとつの選択肢である</p>
+                    <p>ウィリアム・ジェイムズ</p>
+                </div>
+            </div>
+            <div class="end_btn_wrapper flex-1 flex items-center justify-center text-center space-x-2">
+                <button onclick="showScreen('end')" class="bg-indigo-200 hover:bg-indigo-400 text-sky-950 px-10 py-2 rounded-lg">
+                    これでいい
+                </button>
+                <button onclick="selectingAnimation()" class="border border-indigo-200 :bg-indigo-400 px-10 py-2 rounded-lg">
+                    もう一度
+                </button>
+            </div>
+        </div>
+        
+        <!-- 終了画面 -->
+        <div id="end-screen" class="screen hidden min-h-full w-full flex flex-col items-center justify-center space-y-10">
+            <p class="text-2xl">良い選択を…</p>
+            <button onclick="showScreen('title')" id="result-btn" class="bg-indigo-200 hover:bg-indigo-400 text-sky-950 px-4 py-2 rounded-lg w-64">
+                タイトルへ戻る
+            </button>
+        </div>
+    </main>
+    <script src="js/app.js"></script>
+</body>
+</html>
