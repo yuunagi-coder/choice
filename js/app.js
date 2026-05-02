@@ -65,9 +65,13 @@ function saveOptions(){
 
 // 選択中
 function selectingAnimation(){
+  document.getElementById(`result-btn`).classList.add('hidden');
+  document.getElementById(`selecting-text`).classList.remove('hidden');
+
   showScreen('animation')
     setTimeout(() => {
     document.getElementById(`result-btn`).classList.remove('hidden');
+    document.getElementById(`selecting-text`).classList.add('hidden');
     }, 5000);  
 }
 
@@ -76,11 +80,18 @@ function showResult() {
   // ランダムに選択
   const randomIndex = Math.floor(Math.random() * optionValues.length);
   const selectedOption = optionValues[randomIndex];
-  console.log(selectedOption)
+  const quote = appData.getRandomQuote();
+
+  // Xへのシェアリンク
+  const shareText = encodeURIComponent(`今日の選択は「${selectedOption}」でした。\n#CHOCE.`);
+  const url = `https://x.com/intent/tweet?text=${shareText}`;
 
   // 結果画面へ
   showScreen('result');
 
   // 結果を表示
   document.getElementById('result-text').textContent = selectedOption;
+  document.getElementById('result-quote').textContent = quote.text;
+  document.getElementById('result-author').textContent = quote.author;
+  document.getElementById('share-btn').href = url;
 }
