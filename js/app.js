@@ -21,12 +21,24 @@ function addOption(){
   let optionCount = option_element.children.length;
 
   // optionのHTMLを追加
-  let new_element = document.createElement('input');
+  let new_option_item_box = document.createElement('div');
+  new_option_item_box.classList.add('option-item-box');
+
+  let new_input = document.createElement('input');
   optionCount += 1;
-  new_element.type = 'text'
-  new_element.id = `option${optionCount}`
-  new_element.classList.add('option-item', 'bg-sky-900', 'px-4', 'py-2', 'w-64', 'rounded-lg')
-  option_element.appendChild(new_element);
+  new_input.type = 'text'
+  new_input.id = `option${optionCount}`
+  new_input.classList.add('option-item', 'bg-sky-900', 'px-4', 'py-2', 'w-64', 'rounded-lg')
+  
+  let new_deleteBtn = document.createElement('button');
+  new_deleteBtn.textContent = '×'
+  new_deleteBtn.addEventListener('click',() => {
+    new_option_item_box.remove();
+  })
+
+  new_option_item_box.appendChild(new_input);
+  new_option_item_box.appendChild(new_deleteBtn);
+  option_element.appendChild(new_option_item_box);
 }
 
 // 選択肢保存
@@ -46,9 +58,21 @@ function saveOptions(){
   optionValues.push(option_item);
 
   // アニメーション画面へ
-  showScreen('animation')
+  selectingAnimation('animation')
   })
-  console.log(optionValues);
+
+}
+
+// 選択中
+function selectingAnimation(){
+  document.getElementById(`result-btn`).classList.add('hidden');
+  document.getElementById(`selecting-text`).classList.remove('hidden');
+
+  showScreen('animation')
+    setTimeout(() => {
+    document.getElementById(`result-btn`).classList.remove('hidden');
+    document.getElementById(`selecting-text`).classList.add('hidden');
+    }, 5000);  
 }
 
 // 結果表示
@@ -56,11 +80,18 @@ function showResult() {
   // ランダムに選択
   const randomIndex = Math.floor(Math.random() * optionValues.length);
   const selectedOption = optionValues[randomIndex];
-  console.log(selectedOption)
+  const quote = appData.getRandomQuote();
+
+  // Xへのシェアリンク
+  const shareText = encodeURIComponent(`今日の選択は「${selectedOption}」でした。\n#CHOCE.`);
+  const url = `https://x.com/intent/tweet?text=${shareText}`;
 
   // 結果画面へ
   showScreen('result');
 
   // 結果を表示
   document.getElementById('result-text').textContent = selectedOption;
+  document.getElementById('result-quote').textContent = quote.text;
+  document.getElementById('result-author').textContent = quote.author;
+  document.getElementById('share-btn').href = url;
 }
