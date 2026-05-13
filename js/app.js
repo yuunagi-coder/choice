@@ -41,8 +41,8 @@ function addOption(){
   option_element.appendChild(new_option_item_box);
 }
 
-// 選択肢保存
-let optionValues = []
+// 選択肢保存 ※end画面で空にする
+var optionValues = []
 
 function saveOptions(){
   let optionCount = 1;
@@ -84,7 +84,7 @@ function showResult() {
   const quote = appData.getRandomQuote();
 
   // Xへのシェアリンク
-  const shareText = encodeURIComponent(`今日の選択は「${selectedOption}」でした。\n#CHOCE.`);
+  const shareText = encodeURIComponent(`今日の選択は「${selectedOption}」でした。\n#CHOICE.`);
   const url = `https://x.com/intent/tweet?text=${shareText}`;
 
   // 結果画面へ
@@ -95,4 +95,10 @@ function showResult() {
   document.getElementById('result-quote').textContent = quote.text;
   document.getElementById('result-author').textContent = quote.author;
   document.getElementById('share-btn').href = url;
+}
+
+//終了画面
+function showEnd(){
+  optionValues = [];
+  showScreen('end');
 }

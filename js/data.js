@@ -26,9 +26,21 @@ const appData = {
             author: "ウィリアム・ジェイムズ"
         }
     ],
+    comment: [
+        "良い選択を…",
+        "選んだ先で正解にしていこう",
+        "深呼吸して、行ってらっしゃい",
+        "良い一日を…",
+        "あなたらしい答えを…"
+    ],
     
     getRandomQuote(){
         const index = Math.floor(Math.random() * this.quotes.length);
         return this.quotes[index]; 
-    } 
+    } ,
+
+    getRandomComment(){
+        const index = Math.floor(Math.random() * this.comment.length);
+        return this.comment[index];
+    }
 }
